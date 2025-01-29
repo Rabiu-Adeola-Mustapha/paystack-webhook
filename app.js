@@ -15,6 +15,28 @@ const paymentRoutes = require("./routes/paymentRoute");
 
 const app = express();
 
+// Apply CORS as the first middleware
+app.use(
+  cors({
+    origin: [
+
+            "http://localhost:3000", 
+            "https://paystack-webhook-ochre.vercel.app"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
+
+// Handle Preflight Requests (for complex requests)
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.status(200).send();
+});
+
 // enables json
 app.use(express.json());
 //app.use(bodyParser.json());
@@ -28,32 +50,6 @@ app.use(helmet());
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
-//allow request from different domain
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "https://paystack-webhook-ochre.vercel.app",
-      "*",
-      "https://tascomapi-rabiuadeolamustaphas-projects.vercel.app", // Vercel
-    ],
-    methods: ["POST", "GET", "PUT", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
-);
-
-// Explicitly set response headers for CORS
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  );
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
 
 
 
@@ -73,10 +69,10 @@ app.use('/api/paystack/v1/payment', paymentRoutes);
 
 
 
-"http://localhost:8989/api/paystack/v1/.........."
-"http://localhost:8989/api/paystack/v1/payment/initialize..........";
-"http://localhost:8989/api/paystack/v1/payment/webhook..........";
-"http://localhost:8989/api/paystack/v1/reg"
+// "http://localhost:8989/api/paystack/v1/.........."
+// "http://localhost:8989/api/paystack/v1/payment/initialize..........";
+// "http://localhost:8989/api/paystack/v1/payment/webhook..........";
+// "http://localhost:8989/api/paystack/v1/reg"
 
 
 
