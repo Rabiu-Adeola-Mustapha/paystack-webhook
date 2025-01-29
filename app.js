@@ -21,7 +21,8 @@ app.use(
     origin: [
 
             "http://localhost:3000", 
-            "https://paystack-webhook-ochre.vercel.app"
+            "https://paystack-webhook-ochre.vercel.app",
+            "https://paystack-webhook-ochre.vercel.app/api/paystack/v1/payment/initialize"
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"],
