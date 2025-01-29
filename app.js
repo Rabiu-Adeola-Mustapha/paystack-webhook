@@ -31,16 +31,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //allow request from different domain
 app.use(
-    cors({
-      origin: [
-        "http://localhost:3000",
-        '*',
-        "https://tascomapi-rabiuadeolamustaphas-projects.vercel.app"  // Vercel
-      ],
-      methods: ["POST", "GET", 'PUT', 'PATCH', 'DELETE'],
-      credentials: true,
-    })
-  );
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://paystack-webhook-ochre.vercel.app",
+      "*",
+      "https://tascomapi-rabiuadeolamustaphas-projects.vercel.app", // Vercel
+    ],
+    methods: ["POST", "GET", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+  })
+);
 
 
 
