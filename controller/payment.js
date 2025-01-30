@@ -18,11 +18,13 @@ const payWithPaystack = async (req, res) => {
     const response = await startPayment(amount, email);
     console.log("Paystack Response:", response.data);
 
-    return {
-      status: "success",
-      message: "Payment initiated successfully",
-      data: response.data,
-    };
+     res.status(200).json({
+       status: "success",
+       message: "Payment initiated successfully",
+       data: response.data,
+     });
+  
+    
   } catch (error) {
     console.error("Error initializing payment:", error);
     throw new Error("Payment initialization failed.");
