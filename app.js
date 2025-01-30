@@ -19,7 +19,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-
+            "https://paystack-webhook-font.netlify.app",
             "http://localhost:3000", 
             "https://paystack-webhook-ochre.vercel.app",
             "https://paystack-webhook-ochre.vercel.app/api/paystack/v1/payment/initialize"
